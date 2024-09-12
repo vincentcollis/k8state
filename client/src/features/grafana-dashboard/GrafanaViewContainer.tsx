@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import type React from "react"
 import "./Grafana.css"
 import type { RootState } from "../../app/store"
+import { TextField, Button } from "@mui/material"
 
 export default function GrafanaViewContainer() {
   const iframeURL = useAppSelector((state: RootState) => state.iframe.src)
@@ -22,19 +23,22 @@ export default function GrafanaViewContainer() {
     }
 
     return (
-      <div className="wrapper">
+      <div
+        className="wrapper"
+        style={{ position: "relative", left: "-45px", top: "-75px" }}
+      >
         <h2>Connect Your Grafana Dashboard</h2>
         <form onSubmit={handleSubmit}>
-          <label>Link URL</label>
-          <input
-            placeholder={"http://your-grafana-instance/d/your-dashboard-id"}
-            type="text"
+          <TextField
+            label="Grafana URL"
+            color="primary"
+            variant="outlined"
+            placeholder="http://your-grafana-instance/d/your-dashboard-id"
+            focused
             value={inputValue}
             onChange={handleInputChange}
           />
-          <button type={"submit"}>
-            <strong>Connect</strong>
-          </button>
+          <Button type="button">Connect</Button>
         </form>
       </div>
     )
@@ -50,6 +54,7 @@ export default function GrafanaViewContainer() {
           height: "100vh",
           border: "none",
           position: "relative",
+          marginTop: "30px",
         }}
       />
     )
